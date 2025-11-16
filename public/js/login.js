@@ -6,11 +6,12 @@ export const login = async (email, password) => {
   try {
     const res = await axios({
       method: 'POST',
-      url: '/api/v1/users/login', // <-- CHANGED
+      url: '/api/v1/users/login',
       data: {
         email,
         password
-      }
+      },
+      withCredentials: true
     });
 
     if (res.data.status === 'success') {
@@ -28,7 +29,8 @@ export const logout = async () => {
   try {
     const res = await axios({
       method: 'GET',
-      url: '/api/v1/users/logout' // <-- CHANGED
+      url: '/api/v1/users/logout',
+      withCredentials: true
     });
     if (res.data.status === 'success') location.reload(true); // <-- Also fixed a small bug here
   } catch (err) {
@@ -40,19 +42,20 @@ export const signup = async (name, email, password, passwordConfirm) => {
   try {
     const res = await axios({
       method: 'POST',
-      url: '/api/v1/users/signup', // <-- This one was already correct
+      url: '/api/v1/users/signup',
       data: {
         name,
         email,
         password,
         passwordConfirm
-      }
+      },
+      withCredentials: true
     });
 
     if (res.data.status === 'success') {
       showAlert('success', 'Account created successfully!');
       window.setTimeout(() => {
-        location.assign('/');
+        location.assign('/me');
       }, 1500);
     }
   } catch (err) {

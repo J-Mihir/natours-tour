@@ -24,8 +24,14 @@ app.set('views', path.join(__dirname, 'views'));
 
 // 1) GLOBAL MIDDLEWARES
 // Implement CORS
-app.use(cors()); 
-app.options('*', cors());
+app.use(cors({
+  origin: true,
+  credentials: true
+})); 
+app.options('*', cors({
+  origin: true,
+  credentials: true
+}));
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')));
 
